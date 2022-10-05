@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const LikesSchema = new Schema({
     post:{
-        type: mongoose.Schema.type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:'post'
     },
     likes:{
