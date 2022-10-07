@@ -1,5 +1,6 @@
 const express = require("express");
 const Post = require("../models/Stories");
+const Likes = require("../models/Likes");
 const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
@@ -44,7 +45,7 @@ router.post(
     }
   }
 );
-//**||**\\Route 4: delete a existing post : DELETE "/api/posts/deletepost",Login required
+//**||**\\Route 3: delete a existing post : DELETE "/api/posts/deletepost",Login required
 router.delete("/deletepost/:id", fetchuser, async (req, res) => {
   try {
     //Find the post to be deleted
@@ -57,6 +58,10 @@ router.delete("/deletepost/:id", fetchuser, async (req, res) => {
       return res.status(401).send("not allowed");
     }
     post = await Post.findByIdAndDelete(req.params.id);
+    let likes = await Likes.find({post:req.params.id});
+    for (let index = 0; index < likes.length; index++) {
+      const element = await Likes.findByIdAndDelete(likes[index].id);
+    }
     res.json({ Success: "note has been deleted ", post: post });
   } catch (error) {
     console.error(error.message);

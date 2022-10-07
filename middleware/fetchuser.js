@@ -1,9 +1,7 @@
 var jwt = require('jsonwebtoken');
-const { model } = require('mongoose');
 const JWT_SECRET = 'soukhin_mix_mint';
 
 const fetchuser = (req,res,next)=>{
-    const success = false;
     const token = req.header('auth-token');
     if(!token){
         res.status(401).send({error:"Please authenticate using a valid token "});

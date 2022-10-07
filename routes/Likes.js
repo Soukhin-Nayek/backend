@@ -1,11 +1,6 @@
 const express = require("express");
-const User = require("../models/User");
-const Post = require("../models/Stories");
 const Likes = require("../models/Likes");
 const fetchuser = require("../middleware/fetchuser");
-const fetchallpost = require("../middleware/fetchpost");
-const { body, validationResult } = require("express-validator");
-const { find, findByIdAndDelete } = require("../models/User");
 const router = express.Router();
 
 //**||**\\Route 1 : fatch number of likes and others GET "api/likes/fatchlikes" , login required
@@ -38,9 +33,9 @@ router.post('/addlike',fetchuser ,async(req,res)=>{
         }
         else {
             if(req.body.likes===true)
-            likes = await Likes.findByIdAndUpdate(likes[0].id,{likes:true});
-        if(req.body.comment===true)
-            likes = await Likes.findByIdAndUpdate(likes[0].id,{comments:req.body.comments});
+                likes = await Likes.findByIdAndUpdate(likes[0].id,{likes:true});
+            if(req.body.comment===true)
+                likes = await Likes.findByIdAndUpdate(likes[0].id,{comments:req.body.comments});
         }
     } catch(error){
         console.log(error);
