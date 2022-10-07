@@ -6,9 +6,13 @@ const LikesSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'post'
     },
+    username:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user'
+    },
     likes:{
-        type:Number,
-        default:0
+        type:Boolean,
+        default:false
     },
     comments:{
         type:String,
