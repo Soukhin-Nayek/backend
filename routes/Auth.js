@@ -59,7 +59,7 @@ router.post('/login',[
     let success = false;
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(400).json({success , errors:errors.arrey()});
+        return res.status(400).json({success , errors:errors});
     }
     const {email,password}=req.body;
     try{
